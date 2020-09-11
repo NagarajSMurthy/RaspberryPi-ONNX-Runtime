@@ -1,0 +1,34 @@
+Step 24/25 : RUN ls -l /code/onnxruntime/build/Linux/${BUILDTYPE}/*.so
+ ---> Running in 702f0dabef0c
+-rwxr-xr-x 1 root root   20660 Sep  1 21:26 /code/onnxruntime/build/Linux/MinSizeRel/libcustom_op_library.so
+lrwxrwxrwx 1 root root      23 Sep  1 21:15 /code/onnxruntime/build/Linux/MinSizeRel/libonnxruntime.so -> libonnxruntime.so.1.4.0
+-rwxr-xr-x 1 root root 8385148 Sep  1 21:34 /code/onnxruntime/build/Linux/MinSizeRel/onnxruntime_pybind11_state.so
+Removing intermediate container 702f0dabef0c
+ ---> 247d93a305fb
+Step 25/25 : RUN ls -l /code/onnxruntime/build/Linux/${BUILDTYPE}/dist/*.whl
+ ---> Running in bebab6345297
+-rw-r--r-- 1 root root 2793630 Sep  1 21:34 /code/onnxruntime/build/Linux/MinSizeRel/dist/onnxruntime-1.4.0-cp38-cp38-linux_armv7l.whl
+Removing intermediate container bebab6345297
+ ---> ceb5c1feac97
+Successfully built ceb5c1feac97
+Successfully tagged onnxruntime-arm32v7:latest
+pi@raspberrypi:~/onnx-build $ sudo docker images
+REPOSITORY                      TAG                    IMAGE ID            CREATED             SIZE
+onnxruntime-arm32v7             latest                 ceb5c1feac97        2 minutes ago       4.71GB
+<none>                          <none>                 5daf4a498aec        16 hours ago        4.18GB
+<none>                          <none>                 a8d640118321        4 days ago          4.18GB
+<none>                          <none>                 87ac36b46669        7 days ago          4.18GB
+<none>                          <none>                 3bb41355adb3        8 days ago          4.18GB
+balenalib/raspberrypi3-python   latest-stretch-build   fa379fc77172        2 weeks ago         676MB
+hello-world                     latest                 851163c78e4a        8 months ago        4.85kB
+pi@raspberrypi:~/onnx-build $ docker create -ti --name onnxruntime_temp onnxruntime-arm32v7 bash
+af7cc4cb718aa88f06e3c6b15ccdc1e108c79ce909b3f5d0794720676b52c09a
+pi@raspberrypi:~/onnx-build $ docker cp onnxruntime_temp:/code/onnxruntime/build/Linux/MinSizeRel/dist/onnxruntime-1.4.0-cp38-cp38-linux_armv7l.whl .
+pi@raspberrypi:~/onnx-build $ ls
+build_log  Dockerfile.arm32v7  onnxruntime-1.4.0-cp38-cp38-linux_armv7l.whl
+pi@raspberrypi:~/onnx-build $ docker rm -fv onnxruntime_temp
+onnxruntime_temp
+pi@raspberrypi:~/onnx-build $ ls
+build_log  Dockerfile.arm32v7  onnxruntime-1.4.0-cp38-cp38-linux_armv7l.whl
+pi@raspberrypi:~/onnx-build $ 
+
