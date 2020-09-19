@@ -3,8 +3,8 @@ FROM balenalib/raspberrypi3-python:latest-stretch-build
 ARG ONNXRUNTIME_REPO=https://github.com/Microsoft/onnxruntime
 #ARG ONNXRUNTIME_REPO=https://github.com/NagarajSMurthy/onnxruntime
 
-ARG ONNXRUNTIME_SERVER_BRANCH=snnn/p011
-# changed from master
+ARG ONNXRUNTIME_SERVER_BRANCH=master
+# changed from snnn/p011
 
 #Enforces cross-compilation through Quemu
 #Uncomment the if you are building on a non-ARM (x86) device
